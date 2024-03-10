@@ -69,8 +69,8 @@ export default {
         copyWithEmptySelection: false,
         showPrintMargin: false,
         highlightActiveLine: true,
-        fontFamily: 'Consolas',
-        fontSize: '13px',
+        // fontFamily: 'monospace',
+        fontSize: '14px',
         enableBasicAutocompletion: true,                      // 启用基本自动补全
         enableSnippets: true,                                 // 启用代码片段
         enableLiveAutocompletion: true,                       // 启用实时自动补全

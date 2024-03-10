@@ -36,6 +36,8 @@ export default {
     const AccessKey = ref('');
     const SecretKey = ref('');
 
+    const base_url = 'http://120.27.246.64:3000';
+
     // 获取执行密钥
     const getExecuteKey = () => {
       if(localStorage.getItem('AccessKey') && localStorage.getItem('SecretKey')) {
@@ -43,7 +45,7 @@ export default {
         SecretKey.value = localStorage.getItem('SecretKey');
       }
       $.ajax({
-          url:'http://120.27.246.64:3000/api/getApiKey',
+          url:base_url + '/api/getApiKey',
           type:'get',
           success(resp) {
             if(resp.code == 200) {
@@ -67,9 +69,8 @@ export default {
       if(resultInfoRef.value.input && resultInfoRef.value.input.length > 0) {
         data = {...data, inputs: [resultInfoRef.value.input]}
       }
-      console.log(data);
       $.ajax({
-          url:'http://120.27.246.64:3000/api/execode',
+          url:base_url + '/api/execode',
           type:'post',
           headers:{
             'Authorization': 'Bearer ' + AccessKey.value + ' ' + SecretKey.value

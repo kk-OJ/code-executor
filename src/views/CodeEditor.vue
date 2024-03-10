@@ -59,7 +59,7 @@ export default {
         selectLang: 'Java',
         editorLang: 'java',
         executeLang: 'java',
-        codeTemplate: `import java.util.Scanner;
+        codeTemplate: `import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -108,7 +108,9 @@ int main()
         selectLang: 'Javascript',
         editorLang: 'javascript',
         executeLang: 'javascript',
-        codeTemplate: `// 你的代码
+        codeTemplate: `const fs = require('fs')
+const data = fs.readFileSync('/dev/stdin')
+// 你的代码
 `,
       },
       'Go': {
@@ -116,8 +118,6 @@ int main()
         editorLang: 'golang',
         executeLang: 'golang',
         codeTemplate: `package main
-
-import "fmt"
 
 func main() {
     // 你的代码

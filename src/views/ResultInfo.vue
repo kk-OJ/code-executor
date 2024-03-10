@@ -1,6 +1,9 @@
 <template>
   <div>
     <a-card title="运行结果" :headStyle="{backgroundColor:'#f2f2f2',height:'56px',userSelect:'none'}" :bodyStyle="{backgroundColor:'#fdfdfd'}" >
+      <template #extra>
+        <GithubOutlined @click="toGithub" style="font-size: 20px; cursor: pointer;" />
+      </template>
       <div class="kk-class">
         <div>
           <a-card title="输入数据" :headStyle="{backgroundColor:'#f2f2f2',userSelect:'none'}" >
@@ -44,7 +47,7 @@
 
 <script>
 import { ref } from 'vue';
-import { CopyOutlined } from '@ant-design/icons-vue';
+import { CopyOutlined, GithubOutlined } from '@ant-design/icons-vue';
 import { message } from 'ant-design-vue';
 import useClipboard from "vue-clipboard3";
 
@@ -52,6 +55,7 @@ export default {
   name: 'ResultInfo',
   components: {
     CopyOutlined,
+    GithubOutlined,
   },
   props:['loading'],
   setup() {
@@ -70,11 +74,17 @@ export default {
       else message.warning("内容为空");
     }
 
+    // 前往GitHub页面
+    const toGithub = () => {
+      window.open("https://github.com/zyyzyykk/code-judge", "_blank");
+    }
+
     return {
       input,
       output,
       stderr,
       doCopy,
+      toGithub,
     }
   }
 }
