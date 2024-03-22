@@ -78,7 +78,7 @@ export default {
           data:data,
           success(resp) {
             if(resp.code != 200) {
-              message.error(resp.info);
+              message.error({content:resp.info,key:resp.info});
             }
             else if(resp.data.executeType == '执行成功') {
               resultInfoRef.value.output = resp.data.stdout[0];

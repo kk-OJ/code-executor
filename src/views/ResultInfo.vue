@@ -2,7 +2,10 @@
   <div>
     <a-card title="运行结果" :headStyle="{backgroundColor:'#f2f2f2',height:'56px',userSelect:'none'}" :bodyStyle="{backgroundColor:'#fdfdfd'}" >
       <template #extra>
-        <GithubOutlined @click="toGithub" style="font-size: 20px; cursor: pointer;" />
+        <a-tooltip>
+          <template #title>Github</template>
+          <GithubOutlined @click="toGithub" style="font-size: 20px; cursor: pointer;" />
+        </a-tooltip>
       </template>
       <div class="kk-class">
         <div>
@@ -15,12 +18,15 @@
           <a-card title="输出结果" :headStyle="{backgroundColor:'#f2f2f2',userSelect:'none'}" >
             <template #extra>
               <div>
-                <CopyOutlined style="font-size: 18px;" @click="doCopy(output)" />
+                <a-tooltip>
+                  <template #title>复制输出</template>
+                  <CopyOutlined style="font-size: 18px;" @click="doCopy(output)" />
+                </a-tooltip>
               </div>
             </template>
             <a-spin :spinning="loading" >
-              <div class="kk-card-body preserve-space">
-                {{ !(output && output.length > 0) ? '无输出结果' : output }}
+              <div class="kk-card-body">
+                <pre>{{ !(output && output.length > 0) ? '无输出结果' : output }}</pre>
               </div>
             </a-spin>
           </a-card>
@@ -30,12 +36,15 @@
           <a-card title="错误信息" :headStyle="{backgroundColor:'#f2f2f2',userSelect:'none'}" :bodyStyle="{color:'#f63636'}" >
             <template #extra>
               <div>
-                <CopyOutlined style="font-size: 18px;" @click="doCopy(stderr)" />
+                <a-tooltip>
+                  <template #title>复制错误</template>
+                  <CopyOutlined style="font-size: 18px;" @click="doCopy(stderr)" />
+                </a-tooltip>
               </div>
             </template>
             <a-spin :spinning="loading" >
-              <div class="kk-card-body preserve-space">
-                {{ !(stderr && stderr.length > 0) ? '无错误信息' : stderr }}
+              <div class="kk-card-body">
+                <pre>{{ !(stderr && stderr.length > 0) ? '无错误信息' : stderr }}</pre>
               </div>
             </a-spin>
           </a-card>
@@ -69,9 +78,9 @@ export default {
     const doCopy = async (content) => {
       if(content && content.length > 0) {
         await toClipboard(content);
-        message.success("复制成功");
+        message.success({content:'复制成功',key:'复制成功'});
       }
-      else message.warning("内容为空");
+      else message.warning({content:'内容为空',key:'内容为空'});
     }
 
     // 前往GitHub页面
@@ -99,8 +108,8 @@ export default {
   overflow-x: auto;
 }
 
-.preserve-space {
-  white-space: pre;
+pre {
+  margin: 0 0;
 }
 
 .kk-class {

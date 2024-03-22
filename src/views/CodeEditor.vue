@@ -154,7 +154,7 @@ func main() {
     const handleSave = (code) => {
       localStorage.setItem('lang', lang.value);
       localStorage.setItem('code-' + lang.value, code);
-      message.success('保存成功');
+      message.success({content:'保存成功',key:'保存成功'});
     }
 
     onMounted(() => {
