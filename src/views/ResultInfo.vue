@@ -10,8 +10,23 @@
       <div class="kk-class">
         <div>
           <a-card title="输入数据" :headStyle="{backgroundColor:'#f2f2f2',userSelect:'none'}" >
+            <template #extra>
+              <div>
+                <a-tooltip>
+                  <template #title>上传输入</template>
+                  <a-upload
+                    :customRequest="parseInput"
+                    :showUploadList="false"
+                  >
+                  <ImportOutlined style="font-size: 18px; cursor: pointer;" />
+                  </a-upload>
+                </a-tooltip>
+              </div>
+            </template>
           </a-card>
-          <a-textarea autoSize size="large" v-model:value="input" placeholder="" allow-clear />
+          <a-spin :spinning="loadingInput" >
+            <a-textarea autoSize size="large" v-model:value="input" placeholder="" allow-clear />
+          </a-spin> 
         </div>
         <div style="height: 40px;"></div>
         <div>
@@ -56,7 +71,7 @@
 
 <script>
 import { ref } from 'vue';
-import { CopyOutlined, GithubOutlined } from '@ant-design/icons-vue';
+import { CopyOutlined, GithubOutlined, ImportOutlined } from '@ant-design/icons-vue';
 import { message } from 'ant-design-vue';
 import useClipboard from "vue-clipboard3";
 
@@ -65,6 +80,7 @@ export default {
   components: {
     CopyOutlined,
     GithubOutlined,
+    ImportOutlined,
   },
   props:['loading'],
   setup() {
@@ -86,6 +102,25 @@ export default {
     // 前往GitHub页面
     const toGithub = () => {
       window.open("https://github.com/zyyzyykk/code-judge", "_blank");
+    };
+
+    // 上传输入
+    const loadingInput = ref(false);
+    const parseInput = (data) => {
+      let file = data.file;
+      const fileReader = new FileReader();
+      fileReader.onload = () => {
+        const content = fileReader.result;
+        input.value = content;
+        message.success({content:'读取输入成功',key:'文件输入成功'});
+        loadingInput.value = false;
+      };
+      fileReader.onerror = () => {
+        message.error({content:'读取输入失败',key:'文件输入失败'});
+        loadingInput.value = false;
+      };
+      loadingInput.value = true;
+      fileReader.readAsText(file);
     }
 
     return {
@@ -94,6 +129,8 @@ export default {
       stderr,
       doCopy,
       toGithub,
+      parseInput,
+      loadingInput,
     }
   }
 }
