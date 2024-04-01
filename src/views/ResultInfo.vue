@@ -101,7 +101,7 @@ export default {
 
     // 前往GitHub页面
     const toGithub = () => {
-      window.open("https://github.com/zyyzyykk/code-judge", "_blank");
+      window.open("https://github.com/kk-OJ/code-judge", "_blank");
     };
 
     // 上传输入

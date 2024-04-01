@@ -3,7 +3,10 @@
     <a-card title="源代码" :bordered="false" :headStyle="{backgroundColor:'#f2f2f2',height:'56px',userSelect:'none'}" >
       <template #extra>
         <div class="kk-flex">
-          <SyncOutlined @click="resetCode" style="font-size: 18px; cursor: pointer;" />
+          <a-tooltip>
+            <template #title>重置代码</template>
+            <SyncOutlined @click="resetCode" style="font-size: 18px; cursor: pointer;" />
+          </a-tooltip>
           <div style="margin-left: 20px;">
             <a-dropdown>
               <template #overlay>
