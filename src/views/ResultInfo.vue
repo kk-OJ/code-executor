@@ -25,7 +25,7 @@
             </template>
           </a-card>
           <a-spin :spinning="loadingInput" >
-            <a-textarea autoSize size="large" v-model:value="input" placeholder="" allow-clear />
+            <a-textarea autoSize size="large" v-model:value="input" placeholder="" allow-clear :maxlength="input_max_len" />
           </a-spin> 
         </div>
         <div style="height: 40px;"></div>
@@ -85,6 +85,7 @@ export default {
   props:['loading'],
   setup() {
 
+    const input_max_len = ref(1024);
     const input = ref('');
     const output = ref('');
     const stderr = ref('');
@@ -120,7 +121,7 @@ export default {
         loadingInput.value = false;
       };
       loadingInput.value = true;
-      fileReader.readAsText(file);
+      fileReader.readAsText(file.slice(0, input_max_len.value));
     }
 
     return {
@@ -131,6 +132,7 @@ export default {
       toGithub,
       parseInput,
       loadingInput,
+      input_max_len,
     }
   }
 }

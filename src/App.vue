@@ -65,9 +65,9 @@ export default {
       let data = {
         code:code,
         lang:langInfo.executeLang,
-      };
+      }
       if(resultInfoRef.value.input && resultInfoRef.value.input.length > 0) {
-        data = {...data, inputs: [resultInfoRef.value.input]}
+        data.inputs = [resultInfoRef.value.input];
       }
       $.ajax({
           url:base_url + '/api/execode',
