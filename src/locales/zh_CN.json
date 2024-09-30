@@ -1,0 +1,19 @@
+{
+    "Source Code": "源代码",
+    "reset": "重置",
+    "execute": "运行",
+    "saved": "保存成功",
+    "Run Results": "运行结果",
+    "Input Data": "输入数据",
+    "Upload Input": "上传输入",
+    "Output Result": "输出结果",
+    "Copy Output": "复制输出",
+    "No Output Result": "无输出结果",
+    "Error Message": "错误信息",
+    "Copy Error": "复制错误",
+    "No Error Message": "无错误信息",
+    "copied": "复制成功",
+    "contentless": "内容为空",
+    "Read Input Successfully": "读取输入成功",
+    "Read Input Failed": "读取输入失败"
+}

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-card title="运行结果" :headStyle="{backgroundColor:'#f2f2f2',height:'56px',userSelect:'none'}" :bodyStyle="{backgroundColor:'#fdfdfd'}" >
+    <a-card :title="t('Run Results')" :headStyle="{backgroundColor:'#f2f2f2',height:'56px',userSelect:'none'}" :bodyStyle="{backgroundColor:'#fdfdfd'}" >
       <template #extra>
         <a-tooltip>
           <template #title>Github</template>
@@ -9,11 +9,11 @@
       </template>
       <div class="kk-class">
         <div>
-          <a-card title="输入数据" :headStyle="{backgroundColor:'#f2f2f2',userSelect:'none'}" >
+          <a-card :title="t('Input Data')" :headStyle="{backgroundColor:'#f2f2f2',userSelect:'none'}" >
             <template #extra>
               <div>
                 <a-tooltip>
-                  <template #title>上传输入</template>
+                  <template #title>{{ t('Upload Input') }}</template>
                   <a-upload
                     :customRequest="parseInput"
                     :showUploadList="false"
@@ -30,36 +30,36 @@
         </div>
         <div style="height: 40px;"></div>
         <div>
-          <a-card title="输出结果" :headStyle="{backgroundColor:'#f2f2f2',userSelect:'none'}" >
+          <a-card :title="t('Output Result')" :headStyle="{backgroundColor:'#f2f2f2',userSelect:'none'}" >
             <template #extra>
               <div>
                 <a-tooltip>
-                  <template #title>复制输出</template>
+                  <template #title>{{ t('Copy Output') }}</template>
                   <CopyOutlined style="font-size: 18px;" @click="doCopy(output)" />
                 </a-tooltip>
               </div>
             </template>
             <a-spin :spinning="loading" >
               <div class="kk-card-body">
-                <pre>{{ !(output && output.length > 0) ? '无输出结果' : output }}</pre>
+                <pre>{{ !(output && output.length > 0) ? t('No Output Result') : output }}</pre>
               </div>
             </a-spin>
           </a-card>
         </div>
         <div style="height: 40px;"></div>
         <div>
-          <a-card title="错误信息" :headStyle="{backgroundColor:'#f2f2f2',userSelect:'none'}" :bodyStyle="{color:'#f63636'}" >
+          <a-card :title="t('Error Message')" :headStyle="{backgroundColor:'#f2f2f2',userSelect:'none'}" :bodyStyle="{color:'#f63636'}" >
             <template #extra>
               <div>
                 <a-tooltip>
-                  <template #title>复制错误</template>
+                  <template #title>{{ t('Copy Error') }}</template>
                   <CopyOutlined style="font-size: 18px;" @click="doCopy(stderr)" />
                 </a-tooltip>
               </div>
             </template>
             <a-spin :spinning="loading" >
               <div class="kk-card-body">
-                <pre>{{ !(stderr && stderr.length > 0) ? '无错误信息' : stderr }}</pre>
+                <pre>{{ !(stderr && stderr.length > 0) ? t('No Error Message') : stderr }}</pre>
               </div>
             </a-spin>
           </a-card>
@@ -74,6 +74,7 @@ import { ref } from 'vue';
 import { CopyOutlined, GithubOutlined, ImportOutlined } from '@ant-design/icons-vue';
 import { message } from 'ant-design-vue';
 import useClipboard from "vue-clipboard3";
+import { useI18n } from 'vue-i18n';
 
 export default {
   name: 'ResultInfo',
@@ -85,6 +86,8 @@ export default {
   props:['loading'],
   setup() {
 
+    const { t } = useI18n();
+
     const input_max_len = ref(1024);
     const input = ref('');
     const output = ref('');
@@ -95,10 +98,10 @@ export default {
     const doCopy = async (content) => {
       if(content && content.length > 0) {
         await toClipboard(content);
-        message.success({content:'复制成功',key:'复制成功'});
+        message.success({content:t('copied'),key:t('copied')});
       }
-      else message.warning({content:'内容为空',key:'内容为空'});
-    }
+      else message.warning({content:t('contentless'),key:t('contentless')});
+    };
 
     // 前往GitHub页面
     const toGithub = () => {
@@ -113,18 +116,19 @@ export default {
       fileReader.onload = () => {
         const content = fileReader.result;
         input.value = content;
-        message.success({content:'读取输入成功',key:'文件输入成功'});
+        message.success({content:t('Read Input Successfully'),key:t('Read Input Successfully')});
         loadingInput.value = false;
       };
       fileReader.onerror = () => {
-        message.error({content:'读取输入失败',key:'文件输入失败'});
+        message.error({content:t('Read Input Failed'),key:t('Read Input Failed')});
         loadingInput.value = false;
       };
       loadingInput.value = true;
       fileReader.readAsText(file.slice(0, input_max_len.value));
-    }
+    };
 
     return {
+      t,
       input,
       output,
       stderr,

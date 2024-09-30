@@ -1,0 +1,19 @@
+{
+    "Source Code": "Source Code",
+    "reset": "reset",
+    "execute": "execute",
+    "saved": "saved",
+    "Run Results": "Run Results",
+    "Input Data": "Input Data",
+    "Upload Input": "Upload Input",
+    "Output Result": "Output Result",
+    "Copy Output": "Copy Output",
+    "No Output Result": "No Output Result",
+    "Error Message": "Error Message",
+    "Copy Error": "Copy Error",
+    "No Error Message": "No Error Message",
+    "copied": "copied",
+    "contentless": "contentless",
+    "Read Input Successfully": "Read Input Successfully",
+    "Read Input Failed": "Read Input Failed"
+}

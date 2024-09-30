@@ -1,10 +1,10 @@
 <template>
   <div>
-    <a-card title="源代码" :bordered="false" :headStyle="{backgroundColor:'#f2f2f2',height:'56px',userSelect:'none'}" >
+    <a-card :title="t('Source Code')" :bordered="false" :headStyle="{backgroundColor:'#f2f2f2',height:'56px',userSelect:'none'}" >
       <template #extra>
         <div class="kk-flex">
           <a-tooltip>
-            <template #title>重置代码</template>
+            <template #title>{{ t('reset') }}</template>
             <SyncOutlined @click="resetCode" style="font-size: 18px; cursor: pointer;" />
           </a-tooltip>
           <div style="margin-left: 20px;">
@@ -26,7 +26,7 @@
             </a-dropdown>
           </div>
           <div style="margin-left: 15px;">
-            <a-button type="primary" :loading="loading" @click="executeCode" >运行</a-button>
+            <a-button type="primary" :loading="loading" @click="executeCode" >{{ t('execute') }}</a-button>
           </div>
         </div>
       </template>
@@ -42,6 +42,7 @@ import { onMounted, ref } from 'vue';
 import AceEditor from '../components/AceEditor';
 import { DownOutlined, SyncOutlined } from '@ant-design/icons-vue';
 import { message } from 'ant-design-vue';
+import { useI18n } from 'vue-i18n';
 
 export default {
   name: 'CodeEditor',
@@ -52,6 +53,8 @@ export default {
   },
   props: ['loading'],
   setup(props,context) {
+
+    const { t } = useI18n();
 
     const codeEditorRef = ref();
     const lang = ref('Java');
@@ -150,15 +153,15 @@ func main() {
     // 重置代码
     const resetCode = () => {
       if(codeEditorRef.value) codeEditorRef.value.setValue(langMap[lang.value].codeTemplate);
-    }
+    };
 
 
     // 保存代码
     const handleSave = (code) => {
       localStorage.setItem('lang', lang.value);
       localStorage.setItem('code-' + lang.value, code);
-      message.success({content:'保存成功',key:'保存成功'});
-    }
+      message.success({content:t('saved'),key:t('saved')});
+    };
 
     onMounted(() => {
       if(localStorage.getItem('lang')) {
@@ -170,6 +173,7 @@ func main() {
     
 
     return {
+      t,
       codeEditorRef,
       lang,
       handleMenuClick,

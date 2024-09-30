@@ -1,0 +1,19 @@
+{
+    "Source Code": "源代碼",
+    "reset": "重置",
+    "execute": "運行",
+    "saved": "保存成功",
+    "Run Results": "運行結果",
+    "Input Data": "輸入數據",
+    "Upload Input": "上傳輸入",
+    "Output Result": "輸出結果",
+    "Copy Output": "複製輸出",
+    "No Output Result": "無輸出結果",
+    "Error Message": "錯誤信息",
+    "Copy Error": "複製錯誤",
+    "No Error Message": "無錯誤信息",
+    "copied": "複製成功",
+    "contentless": "内容為空",
+    "Read Input Successfully": "讀取輸入成功",
+    "Read Input Failed": "讀取輸入失敗"
+}

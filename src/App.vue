@@ -95,14 +95,14 @@ export default {
             loading.value = false;
           }
       });
-    }
+    };
 
     onMounted(() => {
       getExecuteKey();
       setInterval(() => {
         getExecuteKey();
       }, 40*60*1000);
-    })
+    });
 
     return {
       loading,
