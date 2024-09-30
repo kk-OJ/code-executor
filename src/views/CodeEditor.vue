@@ -8,7 +8,7 @@
             <SyncOutlined @click="resetCode" style="font-size: 18px; cursor: pointer;" />
           </a-tooltip>
           <div style="margin-left: 20px;">
-            <a-dropdown>
+            <a-dropdown trigger="click" >
               <template #overlay>
                 <a-menu>
                   <a-menu-item @click="handleMenuClick('Java')" key="Java">Java</a-menu-item>
@@ -66,7 +66,7 @@ export default {
 
 public class Main {
     public static void main(String[] args) {
-        // 你的代码
+        // write your code
         
     }
 }`,
@@ -82,7 +82,7 @@ using namespace std;
 
 int main()
 {
-    // 你的代码
+    // write your code
     
     return 0;
 }`,
@@ -95,7 +95,7 @@ int main()
 
 int main()
 {
-    // 你的代码
+    // write your code
     
     return 0;
 }`
@@ -104,7 +104,7 @@ int main()
         selectLang: 'Python',
         editorLang: 'python',
         executeLang: 'python',
-        codeTemplate: `# 你的代码
+        codeTemplate: `# write your code
 `,
       },
       'Javascript': {
@@ -113,7 +113,7 @@ int main()
         executeLang: 'javascript',
         codeTemplate: `const fs = require('fs')
 const data = fs.readFileSync('/dev/stdin')
-// 你的代码
+// write your code
 `,
       },
       'Go': {
@@ -123,7 +123,7 @@ const data = fs.readFileSync('/dev/stdin')
         codeTemplate: `package main
 
 func main() {
-    // 你的代码
+    // write your code
     
 }`,
       },
